@@ -10,6 +10,11 @@ server.get('/getName',function (req,res){
     res.send('Swarup Bam');
 });
 
+server.post('/alita_webhook_test', function(reqeust, response) {
+    console.log('Act webhook test');
+    console.log(JSON.stringify(reqeust));
+});
+
 server.listen(port, function () {
     console.log("Server is up and running...");
 });
