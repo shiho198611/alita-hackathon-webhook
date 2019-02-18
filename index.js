@@ -12,7 +12,8 @@ server.get('/getName',function (req,res){
 
 server.post('/actalita', function(reqeust, response) {
     console.log('Act webhook test');
-    console.log('Get Act intent name: '+reqeust.queryResult.intent.name);
+    console.log('Req body: '+JSON.stringify(reqeust.body));
+    console.log('Get Act intent name: '+reqeust.body.queryResult.intent.name);
 });
 
 server.listen(port, function () {
