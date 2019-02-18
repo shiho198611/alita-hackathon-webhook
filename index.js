@@ -9,3 +9,7 @@ const server = express();
 server.get('/getName',function (req,res){
     res.send('Swarup Bam');
 });
+
+server.listen(port, function () {
+    console.log("Server is up and running...");
+});
