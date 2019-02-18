@@ -10,7 +10,7 @@ server.get('/getName',function (req,res){
     res.send('Swarup Bam');
 });
 
-server.post('/alita_webhook_test', function(reqeust, response) {
+server.post('/actalita', function(reqeust, response) {
     console.log('Act webhook test');
     console.log(JSON.stringify(reqeust));
 });
