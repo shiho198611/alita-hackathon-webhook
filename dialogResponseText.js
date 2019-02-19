@@ -14,7 +14,7 @@ exports.genResponseText = function(action, alitaRes) {
         }
         
         for(var i=0;i<keys.length;i++) {
-            outputTxt = outputTxt + keys[i] + "\n";
+            outputTxt = outputTxt + data[keys[i]] + "\n";
         }
     }
 
