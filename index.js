@@ -43,15 +43,44 @@ server.post('/actalita', function(req, res) {
             fulfillmentText: outputTxt
         };
 
-        unirest.post(alitaApiUrl)
-            .headers({'Accept': 'application/json', 'Content-Type': 'application/json'})
-            .send(reqBody)
-            .end(function (response) {
-                console.log('alita api response: '+JSON.stringify(response.body));
+        // unirest.post(alitaApiUrl)
+        //     .headers({'Accept': 'application/json', 'Content-Type': 'application/json'})
+        //     .send(reqBody)
+        //     .end(function (response) {
+        //         console.log('alita api response: '+JSON.stringify(response.body));
 
-                res.send(outputData);
+        //         res.send(outputData);
 
+        //     });
+
+
+
+        var promise = new Promise((resolve, reject) =>{
+            mRequest({
+              method: 'POST',
+              url: alitaApiUrl,
+              headers: {
+                'Content-type': 'application/json; charset=utf-8'
+              },
+              json: {
+                action : 'ta',
+                email : 'david.huang@skylinetw.com'
+              }
+            }, function(error, response, body){
+      
+              console.log(JSON.stringify(error));
+              console.log(JSON.stringify(response));
+              console.log(JSON.stringify(body));
+      
+            //   let output = agent.add('旅遊補助有');
+      
+              let mOutput = res.send(outputData);
+
+              resolve(mOutput);
+      
             });
+          });
+
         
     }
     else {
