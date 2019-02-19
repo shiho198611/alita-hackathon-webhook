@@ -43,7 +43,7 @@ server.post('/actalita', function(req, res) {
             fulfillmentText: outputTxt
         };
 
-        unirest.post('http://mockbin.com/request')
+        unirest.post(alitaApiUrl)
             .headers({'Accept': 'application/json', 'Content-Type': 'application/json'})
             .send(reqBody)
             .end(function (response) {
@@ -53,7 +53,6 @@ server.post('/actalita', function(req, res) {
 
             });
         
-
     }
     else {
         var outputTxt = "Sorry, I don't know what you say.";
