@@ -62,9 +62,11 @@ server.post('/actalita', function(req, res) {
             .end(function (response) {
                 console.log('alita api response: '+JSON.stringify(response.body));
 
-                let pOutput = res.send(outputData);
+                res.send(outputData);
+
+                // let pOutput = res.send(outputData);
                 
-                resolve(pOutput);
+                // resolve(pOutput);
             });
 
 
