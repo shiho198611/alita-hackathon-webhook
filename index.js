@@ -13,6 +13,8 @@ const alitaApiUrl = 'https://protected-lowlands-62741.herokuapp.com/api/alita';
 const server = express();
 const mRequest = require('request');
 
+var dialogFlowRes;
+
 server.use(bodyParser.json());
 
 server.get('/getName',function (req,res){
@@ -35,29 +37,12 @@ server.post('/actalita', function(req, res) {
     }
     else if(getIntent == 'alita_travel_allowance') {
         
+        dialogFlowRes = res;
+
         var reqBody = {
             action : 'ta',
             email : 'david.huang@skylinetw.com'
         };
-
-        // var outputTxt = "heroku旅遊補助";
-        // outputData = {
-        //     fulfillmentText: outputTxt
-        // };
-
-    //    unirest.post(alitaApiUrl)
-    //         .headers({'Accept': 'application/json', 'Content-Type': 'application/json'})
-    //         .send(reqBody)
-    //         .end(function (response) {
-    //             console.log('alita api response: '+JSON.stringify(response.body));
-
-    //             outputTxt = "旅遊補助有"+response.body.employee.balance;
-
-    //             res.send(outputData);
-                
-    //             resolve(response);
-    //         });
-
 
         var promise = new Promise((resolve, reject) => {
             unirest.post(alitaApiUrl)
@@ -67,55 +52,12 @@ server.post('/actalita', function(req, res) {
                 console.log('alita api response: '+JSON.stringify(response.body));
 
                 outputTxt = "旅遊補助有"+response.body.employee.balance;
-
                 res.send(genOutputData(outputTxt));
-                
+
                 resolve(response);
             });
         });
 
-        // unirest.post(alitaApiUrl)
-        //     .headers({'Accept': 'application/json', 'Content-Type': 'application/json'})
-        //     .send(reqBody)
-        //     .end(function (response) {
-        //         console.log('alita api response: '+JSON.stringify(response.body));
-
-        //         res.send(outputData);
-
-        //         // let pOutput = res.send(outputData);
-                
-        //         // resolve(pOutput);
-        //     });
-
-
-
-        // var promise = new Promise((resolve, reject) =>{
-        //     mRequest({
-        //       method: 'POST',
-        //       url: alitaApiUrl,
-        //       headers: {
-        //         'Content-type': 'application/json; charset=utf-8'
-        //       },
-        //       json: {
-        //         action : 'ta',
-        //         email : 'david.huang@skylinetw.com'
-        //       }
-        //     }, function(error, response, body){
-      
-        //       console.log(JSON.stringify(error));
-        //       console.log(JSON.stringify(response));
-        //       console.log(JSON.stringify(body));
-      
-        //     //   let output = agent.add('旅遊補助有');
-      
-        //       let mOutput = res.send(outputData);
-
-        //       resolve(mOutput);
-      
-        //     });
-        //   });
-
-        
     }
     else {
         var outputTxt = "Sorry, I don't know what you say.";
@@ -134,7 +76,14 @@ var genOutputData = function(outputTxt) {
     return outputData;
 };
 
-server.use(timeout(30000));
+server.use(timeout(5000));
+server.use(haltOnTimedout);
+
+function haltOnTimedout(req, res, next){
+    if (!req.timedout) next();
+}
+
+
 server.listen(port, function () {
     console.log("Server is up and running...");
 });
