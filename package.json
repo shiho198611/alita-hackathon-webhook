@@ -16,6 +16,7 @@
     "firebase-admin": "^6.0.0",
     "firebase-functions": "^2.0.2",
     "request": "^2.88.0",
-    "unirest": "^0.5.1"
+    "unirest": "^0.5.1",
+    "body-parser": "^1.18.2"
   }
 }

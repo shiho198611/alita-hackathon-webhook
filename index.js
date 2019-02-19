@@ -2,9 +2,13 @@
 
 const express = require('express');
 const http = require('https');
+const bodyParser = require('body-parser');
+
 var port = process.env.PORT || 8080;
 
 const server = express();
+
+server.use(bodyParser.json());
 
 server.get('/getName',function (req,res){
     res.send('Swarup Bam');
