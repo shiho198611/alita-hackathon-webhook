@@ -1,23 +1,17 @@
 {
   "name": "alita2019_hackathon",
   "version": "1.0.0",
-  "description": "",
+  "description": "Node.js server for Dialogflow Webhook.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "NINJA",
   "license": "ISC",
   "dependencies": {
-    "actions-on-google": "^2.2.0",
     "body-parser": "^1.18.2",
     "connect-timeout": "^1.9.0",
-    "dialogflow": "^0.6.0",
-    "dialogflow-fulfillment": "^0.5.0",
     "express": "^4.16.4",
-    "firebase-admin": "^6.0.0",
-    "firebase-functions": "^2.0.2",
-    "request": "^2.88.0",
     "unirest": "^0.5.1"
   }
 }
