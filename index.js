@@ -43,31 +43,31 @@ server.post('/actalita', function(req, res) {
             fulfillmentText: outputTxt
         };
 
-        // var promise = new Promise((resolve, reject) => {
-        //     unirest.post(alitaApiUrl)
-        //     .headers({'Accept': 'application/json', 'Content-Type': 'application/json'})
-        //     .send(reqBody)
-        //     .end(function (response) {
-        //         console.log('alita api response: '+JSON.stringify(response.body));
-
-        //         let pOutput = res.send(outputData);
-                
-        //         resolve(pOutput);
-        //     });
-        // });
-
-        unirest.post(alitaApiUrl)
+        var promise = new Promise((resolve, reject) => {
+            unirest.post(alitaApiUrl)
             .headers({'Accept': 'application/json', 'Content-Type': 'application/json'})
             .send(reqBody)
             .end(function (response) {
                 console.log('alita api response: '+JSON.stringify(response.body));
 
-                res.send(outputData);
-
-                // let pOutput = res.send(outputData);
+                let pOutput = res.send(outputData);
                 
-                // resolve(pOutput);
+                resolve(pOutput);
             });
+        });
+
+        // unirest.post(alitaApiUrl)
+        //     .headers({'Accept': 'application/json', 'Content-Type': 'application/json'})
+        //     .send(reqBody)
+        //     .end(function (response) {
+        //         console.log('alita api response: '+JSON.stringify(response.body));
+
+        //         res.send(outputData);
+
+        //         // let pOutput = res.send(outputData);
+                
+        //         // resolve(pOutput);
+        //     });
 
 
 
