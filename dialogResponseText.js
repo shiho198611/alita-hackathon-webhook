@@ -13,8 +13,8 @@ exports.genResponseText = function(action, alitaRes) {
             keys.push(k);
         }
         
-        for(var key in keys) {
-            outputTxt  = outputTxt + key + "\n";
+        for(var i=0;i<keys.length;i++) {
+            outputTxt = outputTxt + keys[i] + "\n";
         }
     }
 
