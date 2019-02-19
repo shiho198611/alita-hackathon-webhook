@@ -34,13 +34,11 @@ server.post('/actalita', function(req, res) {
     else if(getIntent == 'alita_travel_allowance') {
         
         var reqBody = {
-            user_id :'david198611',
-            user_name : 'David.Huang',
             action : 'ta',
             email : 'david.huang@skylinetw.com'
         };
 
-        var outputTxt = "Sorry, I don't know what you say.";
+        var outputTxt = "heroku旅遊補助";
         outputData = {
             fulfillmentText: outputTxt
         };
@@ -49,7 +47,7 @@ server.post('/actalita', function(req, res) {
             .headers({'Accept': 'application/json', 'Content-Type': 'application/json'})
             .send(reqBody)
             .end(function (response) {
-                console.log(response.body);
+                console.log('alita api response: '+JSON.stringify(response.body));
 
                 res.send(outputData);
 
