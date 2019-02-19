@@ -21,35 +21,13 @@ server.post('/actalita', function(req, res) {
     var outputData;
 
     if(getIntent == actionConst.actionTravelAllowance) {
-
-        // var reqBody = {
-        //     action : 'ta',
-        //     email : 'david.huang@skylinetw.com'
-        // };
-
-        // var promise = new Promise((resolve, reject) => {
-        //     unirest.post(actionConst.alitaApiUrl)
-        //     .headers({'Accept': 'application/json', 'Content-Type': 'application/json'})
-        //     .send(reqBody)
-        //     .end(function (response) {
-        //         console.log('alita api response: '+JSON.stringify(response.body));
-
-        //         outputTxt = "旅遊補助有"+response.body.employee.balance;
-        //         res.send(genOutputData(outputTxt));
-
-        //         resolve(response);
-        //     });
-        // });
-
-
         queryApi('ta', 'david.huang@skylinetw.com', res);
-
     }
     else if(getIntent == actionConst.actionAlitaAllowanceType) {
-
+        queryApi('all_action', 'david.huang@skylinetw.com', res);
     }
     else {
-        var outputTxt = "Sorry, I don't know what you say.";
+        var outputTxt = "不好意思，這不是可接受的問題，請再問一次";
         var outputData = {
             fulfillmentText: outputTxt
         };
@@ -64,10 +42,6 @@ var genOutputData = function(outputTxt) {
     };
     return outputData;
 };
-
-var actActionAlitaAllowanceType = function() {
-    
-}
 
 var queryApi = function(action, email, res) {
     var reqBody = {
