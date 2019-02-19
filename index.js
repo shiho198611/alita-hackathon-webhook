@@ -40,10 +40,10 @@ server.post('/actalita', function(req, res) {
             email : 'david.huang@skylinetw.com'
         };
 
-        var outputTxt = "heroku旅遊補助";
-        outputData = {
-            fulfillmentText: outputTxt
-        };
+        // var outputTxt = "heroku旅遊補助";
+        // outputData = {
+        //     fulfillmentText: outputTxt
+        // };
 
     //    unirest.post(alitaApiUrl)
     //         .headers({'Accept': 'application/json', 'Content-Type': 'application/json'})
@@ -68,7 +68,7 @@ server.post('/actalita', function(req, res) {
 
                 outputTxt = "旅遊補助有"+response.body.employee.balance;
 
-                res.send(outputData);
+                res.send(genOutputData(outputTxt));
                 
                 resolve(response);
             });
@@ -119,7 +119,7 @@ server.post('/actalita', function(req, res) {
     }
     else {
         var outputTxt = "Sorry, I don't know what you say.";
-        outputData = {
+        var outputData = {
             fulfillmentText: outputTxt
         };
 
@@ -127,9 +127,14 @@ server.post('/actalita', function(req, res) {
     }
 });
 
-server.setti
+var genOutputData = function(outputTxt) {
+    var outputData = {
+        fulfillmentText: outputTxt
+    };
+    return outputData;
+};
 
-server.use(timeout(120000));
+server.use(timeout(30000));
 server.listen(port, function () {
     console.log("Server is up and running...");
 });
