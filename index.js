@@ -6,6 +6,8 @@ const bodyParser = require('body-parser');
 const unirest = require('unirest');
 
 var port = process.env.PORT || 8080;
+var timeout = require('connect-timeout');
+
 const alitaApiUrl = 'https://protected-lowlands-62741.herokuapp.com/api/alita';
 
 const server = express();
@@ -127,6 +129,7 @@ server.post('/actalita', function(req, res) {
 
 server.setti
 
+server.use(timeout(120000));
 server.listen(port, function () {
     console.log("Server is up and running...");
 });
