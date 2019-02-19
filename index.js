@@ -29,23 +29,18 @@ server.post('/actalita', function(req, res) {
 
     if(getIntent == 'alita_webhook_test') {
 
-        const agent = new WebhookClient({ req, res });
+        res.setHeader('Content-Type', 'application/json');
+        outputData = {
+            fulfillmentText: 'This is WebHook response via heroku.'
+        };
 
-        // res.setHeader('Content-Type', 'application/json');
-        // outputData = {
-        //     speech: 'This is WebHook response via heroku.',
-        //     displayText: 'This is WebHook response via heroku.'
-        // };
+        res.send(outputData);
 
-        // res.send(outputData);
-
-        agent.add('This is WebHook response via heroku.');
     }
     else {
         var outputTxt = "Sorry, I don't know what you say.";
         outputData = {
-            speech: outputTxt,
-            displayText: outputTxt
+            fulfillmentText: outputTxt
         };
 
         res.send(outputData);
