@@ -43,6 +43,20 @@ server.post('/actalita', function(req, res) {
             fulfillmentText: outputTxt
         };
 
+    //    unirest.post(alitaApiUrl)
+    //         .headers({'Accept': 'application/json', 'Content-Type': 'application/json'})
+    //         .send(reqBody)
+    //         .end(function (response) {
+    //             console.log('alita api response: '+JSON.stringify(response.body));
+
+    //             outputTxt = "旅遊補助有"+response.body.employee.balance;
+
+    //             res.send(outputData);
+                
+    //             resolve(response);
+    //         });
+
+
         var promise = new Promise((resolve, reject) => {
             unirest.post(alitaApiUrl)
             .headers({'Accept': 'application/json', 'Content-Type': 'application/json'})
@@ -52,9 +66,9 @@ server.post('/actalita', function(req, res) {
 
                 outputTxt = "旅遊補助有"+response.body.employee.balance;
 
-                let pOutput = res.send(outputData);
+                res.send(outputData);
                 
-                resolve(pOutput);
+                resolve(response);
             });
         });
 
