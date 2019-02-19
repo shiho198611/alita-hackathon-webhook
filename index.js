@@ -42,7 +42,7 @@ server.post('/actalita', function(req, res) {
         // });
 
 
-        queryApi('ta', 'david.huang@skylinetw.com');
+        queryApi('ta', 'david.huang@skylinetw.com', res);
 
     }
     else if(getIntent == actionConst.actionAlitaAllowanceType) {
@@ -69,7 +69,7 @@ var actActionAlitaAllowanceType = function() {
     
 }
 
-var queryApi = function(action, email, ) {
+var queryApi = function(action, email, res) {
     var reqBody = {
         action : action,
         email : email
