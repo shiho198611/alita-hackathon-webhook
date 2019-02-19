@@ -16,14 +16,32 @@ server.get('/getName',function (req,res){
 
 server.post('/actalita', function(req, res) {
     console.log('Act webhook test');
-    console.log('request response id: '+req.responseId);
-    
-    console.log('Req: '+req);
-    console.log('Res: '+res);
 
     console.log('Req body: '+JSON.stringify(req.body));
-    console.log('Res body: '+JSON.stringify(res.body));
-    console.log('Get Act intent name: '+req.body.queryResult.intent.name);
+    
+    // console.log('Get Act intent name: '+req.body.queryResult.intent.name);
+
+    var getIntent = req.body.queryResult.intent.displayName;
+    var outputData;
+
+    if(getIntent == 'alita_webhook_test') {
+        res.setHeader('Content-Type', 'application/json');
+        outputData = {
+            speech: 'This is WebHook response via heroku.',
+            displayText: 'This is WebHook response via heroku.'
+        };
+
+        res.send(outputData);
+    }
+    else {
+        var outputTxt = "Sorry, I don't know what you say.";
+        outputData = {
+            speech: outputTxt,
+            displayText: outputTxt
+        };
+
+        res.send(outputData);
+    }
 });
 
 server.listen(port, function () {
