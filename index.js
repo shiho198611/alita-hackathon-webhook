@@ -50,6 +50,8 @@ server.post('/actalita', function(req, res) {
             .end(function (response) {
                 console.log('alita api response: '+JSON.stringify(response.body));
 
+                outputTxt = "旅遊補助有"+response.body.employee.balance;
+
                 let pOutput = res.send(outputData);
                 
                 resolve(pOutput);
@@ -108,6 +110,8 @@ server.post('/actalita', function(req, res) {
         res.send(outputData);
     }
 });
+
+server.setti
 
 server.listen(port, function () {
     console.log("Server is up and running...");
