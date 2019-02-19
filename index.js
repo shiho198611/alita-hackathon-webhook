@@ -3,13 +3,13 @@
 const express = require('express');
 const http = require('https');
 const bodyParser = require('body-parser');
-
-const {WebhookClient} = require('dialogflow-fulfillment');
-
+const unirest = require('unirest');
 
 var port = process.env.PORT || 8080;
+const alitaApiUrl = 'https://protected-lowlands-62741.herokuapp.com/api/alita';
 
 const server = express();
+const mRequest = require('request');
 
 server.use(bodyParser.json());
 
@@ -18,23 +18,43 @@ server.get('/getName',function (req,res){
 });
 
 server.post('/actalita', function(req, res) {
-    console.log('Act webhook test');
 
-    console.log('Req body: '+JSON.stringify(req.body));
-    
-    // console.log('Get Act intent name: '+req.body.queryResult.intent.name);
+    console.log('Dialogflow request body: '+JSON.stringify(req.body));
 
     var getIntent = req.body.queryResult.intent.displayName;
     var outputData;
 
     if(getIntent == 'alita_webhook_test') {
-
         res.setHeader('Content-Type', 'application/json');
         outputData = {
             fulfillmentText: 'This is WebHook response via heroku.'
         };
-
         res.send(outputData);
+    }
+    else if(getIntent == 'alita_travel_allowance') {
+        
+        var reqBody = {
+            user_id :'david198611',
+            user_name : 'David.Huang',
+            action : 'ta',
+            email : 'david.huang@skylinetw.com'
+        };
+
+        var outputTxt = "Sorry, I don't know what you say.";
+        outputData = {
+            fulfillmentText: outputTxt
+        };
+
+        unirest.post('http://mockbin.com/request')
+            .headers({'Accept': 'application/json', 'Content-Type': 'application/json'})
+            .send(reqBody)
+            .end(function (response) {
+                console.log(response.body);
+
+                res.send(outputData);
+
+            });
+        
 
     }
     else {
