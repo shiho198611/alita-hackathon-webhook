@@ -4,6 +4,9 @@ const express = require('express');
 const http = require('https');
 const bodyParser = require('body-parser');
 
+const {WebhookClient} = require('dialogflow-fulfillment');
+
+
 var port = process.env.PORT || 8080;
 
 const server = express();
@@ -25,13 +28,18 @@ server.post('/actalita', function(req, res) {
     var outputData;
 
     if(getIntent == 'alita_webhook_test') {
-        res.setHeader('Content-Type', 'application/json');
-        outputData = {
-            speech: 'This is WebHook response via heroku.',
-            displayText: 'This is WebHook response via heroku.'
-        };
 
-        res.send(outputData);
+        const agent = new WebhookClient({ req, res });
+
+        // res.setHeader('Content-Type', 'application/json');
+        // outputData = {
+        //     speech: 'This is WebHook response via heroku.',
+        //     displayText: 'This is WebHook response via heroku.'
+        // };
+
+        // res.send(outputData);
+
+        agent.add('This is WebHook response via heroku.');
     }
     else {
         var outputTxt = "Sorry, I don't know what you say.";
