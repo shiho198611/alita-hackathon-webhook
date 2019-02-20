@@ -62,7 +62,7 @@ var queryApi = function(reqBody, telegramId, res) {
             .end(function (response) {
                 console.log('alita api response: '+JSON.stringify(response.body));
 
-                var outputTxt = dialogResGen.genResponseText(action, response);
+                var outputTxt = dialogResGen.genResponseText(reqBody.action, response);
                 res.send(genOutputData(outputTxt));
 
             });
