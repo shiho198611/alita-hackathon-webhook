@@ -20,7 +20,7 @@ server.post('/actalita', function(req, res) {
     var getIntent = req.body.queryResult.intent.displayName;
     var outputData;
 
-    if(getIntent == actionConst.actionTravelAllowance) {
+    if(getIntent == actionConst.actionAllowanceSearch) {
         queryApi('ta', 'david.huang@skylinetw.com', res);
     }
     else if(getIntent == actionConst.actionAlitaAllowanceInit) {
