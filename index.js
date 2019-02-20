@@ -35,7 +35,7 @@ server.post('/actalita', function(req, res) {
         queryApi(genRequestBody('all_action', telegramUserName), res);
     }
     else if(getIntent == actionConst.actionDownloadBillingStatement) {
-        queryApi(genRequestBody('df', telegramUserName, 'bls'), res);
+        queryApi(genBillingRequestBody('df', telegramUserName, 'bls'), res);
     }
     else if(getIntent == actionConst.actionMeetingRoomBooking) {
         var timeStart = getApiUseTimeFormat(req.body.queryResult.parameters.time);
@@ -167,7 +167,7 @@ var genRequestBody = function(action, telegramId) {
     return reqBody;
 }
 
-var genRequestBody = function(action, telegramId, fileType) {
+var genBillingRequestBody = function(action, telegramId, fileType) {
     var reqBody = {
         action : action,
         telegram_id : telegramId,
