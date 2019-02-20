@@ -29,13 +29,13 @@ server.post('/actalita', function(req, res) {
     }
 
     if(getIntent == actionConst.actionAllowanceSearch) {
-        queryApi('ta', telegramUserName, res);
+        queryApi(genRequestBody('ta', telegramUserName), res);
     }
     else if(getIntent == actionConst.actionAlitaAllowanceInit) {
-        queryApi('all_action', telegramUserName, res);
+        queryApi(genRequestBody('all_action', telegramUserName), res);
     }
     else if(getIntent == actionConst.actionDownloadBillingStatement) {
-        queryApi('bls', telegramUserName, res);
+        queryApi(genRequestBody('df', telegramUserName, 'bls'), res);
     }
     else {
         var outputTxt = "不好意思，這不是可接受的問題，請再問一次";
@@ -54,11 +54,7 @@ var genOutputData = function(outputTxt) {
     return outputData;
 };
 
-var queryApi = function(action, telegramId, res) {
-    var reqBody = {
-        action : action,
-        telegram_id : telegramId
-    };
+var queryApi = function(reqBody, telegramId, res) {
 
     unirest.post(actionConst.alitaApiUrl)
             .headers({'Accept': 'application/json', 'Content-Type': 'application/json'})
@@ -71,6 +67,23 @@ var queryApi = function(action, telegramId, res) {
 
             });
 
+}
+
+var genRequestBody = function(action, telegramId) {
+    var reqBody = {
+        action : action,
+        telegram_id : telegramId
+    };
+    return reqBody;
+}
+
+var genRequestBody = function(action, telegramId, fileType) {
+    var reqBody = {
+        action : action,
+        telegram_id : telegramId,
+        file_type: fileType
+    };
+    return reqBody;
 }
 
 server.use(timeout(5000));
