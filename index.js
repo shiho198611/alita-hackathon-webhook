@@ -24,7 +24,9 @@ server.post('/actalita', function(req, res) {
     var requestTeleUserName = req.body.originalDetectIntentRequest.payload.data.message.chat.username;
 
     if(requestTeleUserName != null) {
-        telegramUserName = requestTeleUserName;
+        // telegramUserName = requestTeleUserName;
+
+        telegramUserName = 'KennethKao';
 
         console.log("telegram username: "+telegramUserName);
     }
