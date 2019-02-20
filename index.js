@@ -37,6 +37,13 @@ server.post('/actalita', function(req, res) {
     else if(getIntent == actionConst.actionDownloadBillingStatement) {
         queryApi(genRequestBody('df', telegramUserName, 'bls'), res);
     }
+    else if(getIntent == actionConst.actionMeetingRoomBooking) {
+        var timeStart = req.body.queryResult.parameters.time;
+        var timeEnd = req.body.queryResult.parameters.time1;
+        
+        queryApi(genRequestBody('mr', telegramUserName, 'ck', getApiUseTimeFormat(AptimeStart), getApiUseTimeFormat(timeEnd)), res);
+
+    }
     else {
         var outputTxt = "不好意思，這不是可接受的問題，請再問一次";
         var outputData = {
@@ -84,6 +91,25 @@ var genRequestBody = function(action, telegramId, fileType) {
         file_type: fileType
     };
     return reqBody;
+}
+
+var genRequestBody = function(action, telegramId, type, sDate, eDate) {
+    var reqBody = {
+        action : action,
+        telegram_id : telegramId,
+        sdate: sDate,
+        edate: eDate,
+        type: type
+    };
+
+    return reqBody;
+}
+
+var getApiUseTimeFormat = function(time) {
+    var date = time.split("T")[0];
+    var useTime = time.split("T")[0].split("+")[0];
+
+    return date+" "+useTime;
 }
 
 server.use(timeout(5000));

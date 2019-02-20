@@ -20,6 +20,17 @@ exports.genResponseText = function(action, alitaRes) {
     else if(action == 'df') {
         outputTxt = "請款單連結如下："+"\n"+alitaRes.body.url;
     }
+    else if(action == 'mr') {
+        if(alitaRes.body.data.length == 0) {
+            outputTxt = "目前還沒人預定";
+        }
+        else{
+            var resData = alitaRes.body.data;
+            for(var i=0;i<resData.length;i++) {
+                outputTxt = outputTxt+resData[i].name+" "+resData[i].room_name+" "+resData[i].start_time+"~"+resData[i].end_time+"\n";
+            }
+        }
+    }
 
     return outputTxt;
 };
