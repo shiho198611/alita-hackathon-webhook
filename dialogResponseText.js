@@ -4,7 +4,7 @@ exports.genResponseText = function(action, alitaRes) {
     var outputTxt = '';
 
     if(action == 'ta') {
-        outputTxt = "旅遊補助有"+alitaRes.body.employee.balance;
+        outputTxt = "旅遊補助有"+alitaRes.body.data[0].balance;
     }
     else if(action == 'all_action') {
         var data = alitaRes.body.data;
