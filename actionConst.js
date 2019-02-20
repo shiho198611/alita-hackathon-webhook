@@ -6,5 +6,6 @@ module.exports = {
     actionDownloadBillingStatement: 'alita_download_billing_statement',
     //meeting room
     actionMeetingRoomNumber: 'alita_meeting_room_number_search',
-    actionMeetingRoomBooking: 'alita_meeting_room_booking'
+    actionMeetingRoomBooking: 'alita_meeting_room_booking',
+    actionMeetingRoomBookingConfirm: "alita_meeting_room_booking - confirm",
 }

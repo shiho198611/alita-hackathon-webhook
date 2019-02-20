@@ -54,6 +54,14 @@ server.post('/actalita', function(req, res) {
 
 
     }
+    else if(getIntent == actionConst.actionMeetingRoomBookingConfirm) {
+        var outputTxt = "Booking confirm testing.";
+        var outputData = {
+            fulfillmentText: outputTxt
+        };
+
+        res.send(outputData);
+    }
     else {
         var outputTxt = "不好意思，這不是可接受的問題，請再問一次";
         var outputData = {
@@ -71,14 +79,15 @@ var genOutputData = function(outputTxt) {
     return outputData;
 };
 
-var genOutputContext = function(session, contextName) {
+var genMeetingRoomOutputContext = function(session, contextName, sDate, eDate) {
     var outputData = {
         outputContexts: [
             {
               name: session+contextName,
               lifespanCount: 1,
               parameters: {
-                booking: "booking room"
+                sdate: sDate,
+                edate: eDate
               }
             }
           ]
@@ -112,7 +121,15 @@ var queryApiRoomBooking = function(reqBody, res, session, contextName) {
                 // var outputTxt = dialogResGen.genResponseText(reqBody.action, response);
                 
                 if(response.body.data.length == 0) {
-                    var outouptData = genOutputContext(session, contextName);
+
+                    var sdate = reqBody.sdate;
+                    var edate = reqBody.sdate;
+
+                    if(reqBody.hasOwnProperty('edate')) {
+                        edate = reqBody.edate;
+                    }
+
+                    var outouptData = genMeetingRoomOutputContext(session, contextName, sdate, edate);
                     res.send(genOutputData(outouptData));
                 }
                 else {
