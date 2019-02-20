@@ -31,14 +31,19 @@ exports.genResponseText = function(action, alitaRes) {
             }
         }
     }
-    
+
     return outputTxt;
 };
 
 exports.genResponseTextViaType = function(action, type, alitaRes) {
+
+    var outputTxt = '';
+
     if(action == 'mr' && type == 'b') {
         if(alitaRes.message == 'Success') {
-            utputTxt = "預定成功";
+            outputTxt = "預定成功";
         }
     }
+
+    return outputTxt;
 }
