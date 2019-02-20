@@ -62,12 +62,14 @@ server.post('/actalita', function(req, res) {
 
         if(req.body.queryResult.outputContexts[0].parameters.time1 != null && req.body.queryResult.outputContexts[0].parameters.time1 != "") {
             var timeEnd = getApiUseTimeFormat(req.body.queryResult.outputContexts[0].parameters.time1);
-            console.log("booking start time: "+timeStart);
-            console.log("booking end time: "+timeEnd);
+            
         
             // queryApiRoomBooking(genRequestBody('mr', telegramUserName, 'ck', timeStart, timeEnd), res, req.body.session, "alita_meeting_room_booking-followup");
             
         }
+
+        console.log("booking start time: "+timeStart);
+        console.log("booking end time: "+timeEnd);
 
         queryApiWithType(genRequestBody('mr', telegramUserName, 'b', timeStart, timeEnd), res);
     }
