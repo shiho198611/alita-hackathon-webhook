@@ -38,10 +38,13 @@ server.post('/actalita', function(req, res) {
         queryApi(genRequestBody('df', telegramUserName, 'bls'), res);
     }
     else if(getIntent == actionConst.actionMeetingRoomBooking) {
-        var timeStart = req.body.queryResult.parameters.time;
-        var timeEnd = req.body.queryResult.parameters.time1;
+        var timeStart = getApiUseTimeFormat(req.body.queryResult.parameters.time);
+        var timeEnd = getApiUseTimeFormat(req.body.queryResult.parameters.time1);
+
+        console.log("start time: "+timeStart);
+        console.log("end time: "+timeEnd);
         
-        queryApi(genRequestBody('mr', telegramUserName, 'ck', getApiUseTimeFormat(timeStart), getApiUseTimeFormat(timeEnd)), res);
+        queryApi(genRequestBody('mr', telegramUserName, 'ck', timeStart, timeEnd), res);
 
     }
     else {
