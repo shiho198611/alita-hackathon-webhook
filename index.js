@@ -50,8 +50,6 @@ server.post('/actalita', function(req, res) {
         else {
             queryApiRoomBooking(genRequestBody('mr', telegramUserName, 'ck', timeStart), res, req.body.session, "alita_meeting_room_booking-followup");
         }
-        
-
 
     }
     else if(getIntent == actionConst.actionMeetingRoomBookingConfirm) {
