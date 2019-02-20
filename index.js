@@ -110,7 +110,7 @@ var genRequestBody = function(action, telegramId, type, sDate, eDate) {
 
 var getApiUseTimeFormat = function(time) {
     var date = time.split("T")[0];
-    var useTime = time.split("T")[0].split("+")[0];
+    var useTime = time.split("T")[1].split("+")[0];
 
     return date+" "+useTime;
 }
