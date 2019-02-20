@@ -40,7 +40,7 @@ server.post('/actalita', function(req, res) {
     else if(getIntent == actionConst.actionMeetingRoomBooking) {
         var timeStart = getApiUseTimeFormat(req.body.queryResult.parameters.time);
 
-        if(req.body.queryResult.parameters.time1 != null) {
+        if(req.body.queryResult.parameters.time1 != null && req.body.queryResult.parameters.time1 != "") {
             var timeEnd = getApiUseTimeFormat(req.body.queryResult.parameters.time1);
             console.log("start time: "+timeStart);
             console.log("end time: "+timeEnd);
