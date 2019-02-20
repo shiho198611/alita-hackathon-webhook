@@ -40,10 +40,13 @@ exports.genResponseTextViaType = function(action, type, alitaRes) {
     var outputTxt = '';
 
     if(action == 'mr' && type == 'b') {
-        if(alitaRes.message == 'Success.') {
-            outputTxt = "預定成功";
-        }
+        // if(alitaRes.message == 'Success.') {
+        //     outputTxt = "預定成功";
+        // }
+        outputTxt = alitaRes.message;
     }
+
+    console.log("genResponseTextViaType: "+outputTxt);
 
     return outputTxt;
 }
