@@ -17,7 +17,7 @@ exports.genResponseText = function(action, alitaRes) {
             outputTxt = outputTxt + data[keys[i]] + "\n";
         }
     }
-    else if(action == 'bls') {
+    else if(action == 'df') {
         outputTxt = "請款單連結如下："+"\n"+alitaRes.body.url;
     }
 
