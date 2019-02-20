@@ -54,7 +54,7 @@ var genOutputData = function(outputTxt) {
     return outputData;
 };
 
-var queryApi = function(reqBody, telegramId, res) {
+var queryApi = function(reqBody, res) {
 
     unirest.post(actionConst.alitaApiUrl)
             .headers({'Accept': 'application/json', 'Content-Type': 'application/json'})
