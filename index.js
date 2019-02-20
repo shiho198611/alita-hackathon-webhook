@@ -71,7 +71,7 @@ server.post('/actalita', function(req, res) {
         console.log("booking start time: "+timeStart);
         console.log("booking end time: "+timeEnd);
 
-        queryApiWithType(genRequestBody('mr', telegramUserName, 'b', timeStart, timeEnd), res);
+        queryApiWithType(genRequestBookingConfirmBody('mr', telegramUserName, 'b', timeStart, timeEnd), res);
     }
     else {
         var outputTxt = "不好意思，這不是可接受的問題，請再問一次";
@@ -188,6 +188,17 @@ var genRequestBody = function(action, telegramId, type, sDate, eDate) {
     return reqBody;
 }
 
+var genRequestBookingConfirmBody = function(action, telegramId, type, sDate, eDate) {
+    var reqBody = {
+        action : action,
+        telegram_id : telegramId,
+        sdate: sDate,
+        edate: eDate,
+        type: type
+    };
+
+    return reqBody;
+}
 
 var genRequestBody = function(action, telegramId, type, sDate) {
     var reqBody = {
