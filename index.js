@@ -119,6 +119,9 @@ var queryApi = function(reqBody, res) {
 }
 
 var queryApiWithType = function(reqBody, res) {
+
+    console.log("request: "+JSON.stringify(reqBody));
+
     unirest.post(actionConst.alitaApiUrl)
             .headers({'Accept': 'application/json', 'Content-Type': 'application/json'})
             .send(reqBody)
