@@ -41,7 +41,7 @@ server.post('/actalita', function(req, res) {
         var timeStart = req.body.queryResult.parameters.time;
         var timeEnd = req.body.queryResult.parameters.time1;
         
-        queryApi(genRequestBody('mr', telegramUserName, 'ck', getApiUseTimeFormat(AptimeStart), getApiUseTimeFormat(timeEnd)), res);
+        queryApi(genRequestBody('mr', telegramUserName, 'ck', getApiUseTimeFormat(timeStart), getApiUseTimeFormat(timeEnd)), res);
 
     }
     else {
