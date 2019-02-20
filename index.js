@@ -26,6 +26,9 @@ server.post('/actalita', function(req, res) {
     else if(getIntent == actionConst.actionAlitaAllowanceInit) {
         queryApi('all_action', 'david.huang@skylinetw.com', res);
     }
+    else if(getIntent == actionConst.actionDownloadBillingStatement) {
+        queryApi('bls', 'david.huang@skylinetw.com', res);
+    }
     else {
         var outputTxt = "不好意思，這不是可接受的問題，請再問一次";
         var outputData = {
