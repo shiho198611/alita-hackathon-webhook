@@ -24,10 +24,7 @@ server.post('/actalita', function(req, res) {
     var requestTeleUserName = req.body.originalDetectIntentRequest.payload.data.message.chat.username;
 
     if(requestTeleUserName != null) {
-        // telegramUserName = requestTeleUserName;
-
-        telegramUserName = 'KennethKao';
-
+        telegramUserName = requestTeleUserName;
         console.log("telegram username: "+telegramUserName);
     }
 
@@ -57,10 +54,10 @@ var genOutputData = function(outputTxt) {
     return outputData;
 };
 
-var queryApi = function(action, email, res) {
+var queryApi = function(action, telegramId, res) {
     var reqBody = {
         action : action,
-        email : email
+        telegram_id : telegramId
     };
 
     unirest.post(actionConst.alitaApiUrl)
