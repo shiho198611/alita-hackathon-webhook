@@ -43,7 +43,7 @@ exports.genResponseTextViaType = function(action, type, alitaRes) {
         // if(alitaRes.message == 'Success.') {
         //     outputTxt = "預定成功";
         // }
-        outputTxt = alitaRes.message;
+        outputTxt = alitaRes.body.message;
     }
 
     console.log("genResponseTextViaType: "+outputTxt);
