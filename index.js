@@ -25,6 +25,8 @@ server.post('/actalita', function(req, res) {
 
     if(requestTeleUserName != null) {
         telegramUserName = requestTeleUserName;
+
+        console.log("telegram username: "+telegramUserName);
     }
 
     if(getIntent == actionConst.actionAllowanceSearch) {
