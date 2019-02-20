@@ -55,12 +55,21 @@ server.post('/actalita', function(req, res) {
 
     }
     else if(getIntent == actionConst.actionMeetingRoomBookingConfirm) {
-        var outputTxt = "Booking confirm testing.";
-        var outputData = {
-            fulfillmentText: outputTxt
-        };
+        // queryApi(genRequestBody('mr', ));
 
-        res.send(outputData);
+        var timeStart = getApiUseTimeFormat(req.body.queryResult.outputContexts.parameters.time);
+        var timeEnd = timeStart;
+
+        if(req.body.queryResult.outputContexts.parameters.time1 != null && req.body.queryResult.outputContexts.parameters.time1 != "") {
+            var timeEnd = getApiUseTimeFormat(req.body.queryResult.outputContexts.parameters.time1);
+            console.log("booking start time: "+timeStart);
+            console.log("booking end time: "+timeEnd);
+        
+            // queryApiRoomBooking(genRequestBody('mr', telegramUserName, 'ck', timeStart, timeEnd), res, req.body.session, "alita_meeting_room_booking-followup");
+            
+        }
+
+        queryApiWithType(genRequestBody('mr', telegramUserName, 'b', timeStart, timeEnd));
     }
     else {
         var outputTxt = "不好意思，這不是可接受的問題，請再問一次";
@@ -79,16 +88,13 @@ var genOutputData = function(outputTxt) {
     return outputData;
 };
 
-var genMeetingRoomOutputContext = function(session, contextName, sDate, eDate) {
+var genMeetingRoomOutputContext = function(session, contextName) {
     var outputData = {
         outputContexts: [
             {
               name: session+contextName,
               lifespanCount: 1,
-              parameters: {
-                sdate: sDate,
-                edate: eDate
-              }
+              parameters: {}
             }
           ]
     }
@@ -110,6 +116,19 @@ var queryApi = function(reqBody, res) {
 
 }
 
+var queryApiWithType = function(reqBody, res) {
+    unirest.post(actionConst.alitaApiUrl)
+            .headers({'Accept': 'application/json', 'Content-Type': 'application/json'})
+            .send(reqBody)
+            .end(function (response) {
+                console.log('alita api response: '+JSON.stringify(response.body));
+
+                var outputTxt = dialogResGen.genResponseTextViaType(reqBody.action, reqBody.type, response);
+                res.send(genOutputData(outputTxt));
+
+            });
+}
+
 var queryApiRoomBooking = function(reqBody, res, session, contextName) {
 
     unirest.post(actionConst.alitaApiUrl)
@@ -122,14 +141,7 @@ var queryApiRoomBooking = function(reqBody, res, session, contextName) {
                 
                 if(response.body.data.length == 0) {
 
-                    var sdate = reqBody.sdate;
-                    var edate = reqBody.sdate;
-
-                    if(reqBody.hasOwnProperty('edate')) {
-                        edate = reqBody.edate;
-                    }
-
-                    var outouptData = genMeetingRoomOutputContext(session, contextName, sdate, edate);
+                    var outouptData = genMeetingRoomOutputContext(session, contextName);
                     res.send(genOutputData(outouptData));
                 }
                 else {
@@ -170,6 +182,7 @@ var genRequestBody = function(action, telegramId, type, sDate, eDate) {
 
     return reqBody;
 }
+
 
 var genRequestBody = function(action, telegramId, type, sDate) {
     var reqBody = {

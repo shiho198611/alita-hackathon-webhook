@@ -31,6 +31,14 @@ exports.genResponseText = function(action, alitaRes) {
             }
         }
     }
-
+    
     return outputTxt;
 };
+
+exports.genResponseTextViaType = function(action, type, alitaRes) {
+    if(action == 'mr' && type == 'b') {
+        if(alitaRes.message == 'Success') {
+            utputTxt = "預定成功";
+        }
+    }
+}
