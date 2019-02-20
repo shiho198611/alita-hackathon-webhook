@@ -46,6 +46,7 @@ server.post('/actalita', function(req, res) {
         
         queryApi(genRequestBody('mr', telegramUserName, 'ck', timeStart, timeEnd), res);
 
+        
     }
     else {
         var outputTxt = "不好意思，這不是可接受的問題，請再問一次";
