@@ -45,10 +45,10 @@ server.post('/actalita', function(req, res) {
             console.log("start time: "+timeStart);
             console.log("end time: "+timeEnd);
         
-            queryApi(genRequestBody('mr', telegramUserName, 'ck', timeStart, timeEnd), res);
+            queryApiRoomBooking(genRequestBody('mr', telegramUserName, 'ck', timeStart, timeEnd), res, req.body.session, "alita_meeting_room_booking-followup");
         }
         else {
-            queryApi(genRequestBody('mr', telegramUserName, 'ck', timeStart), res);
+            queryApiRoomBooking(genRequestBody('mr', telegramUserName, 'ck', timeStart), res, req.body.session, "alita_meeting_room_booking-followup");
         }
         
 
@@ -71,6 +71,21 @@ var genOutputData = function(outputTxt) {
     return outputData;
 };
 
+var genOutputContext = function(session, contextName) {
+    var outputData = {
+        outputContexts: [
+            {
+              name: session+contextName,
+              lifespanCount: 1,
+              parameters: {
+                booking: "booking room"
+              }
+            }
+          ]
+    }
+    return outputData;
+}
+
 var queryApi = function(reqBody, res) {
 
     unirest.post(actionConst.alitaApiUrl)
@@ -81,6 +96,30 @@ var queryApi = function(reqBody, res) {
 
                 var outputTxt = dialogResGen.genResponseText(reqBody.action, response);
                 res.send(genOutputData(outputTxt));
+
+            });
+
+}
+
+var queryApiRoomBooking = function(reqBody, res, session, contextName) {
+
+    unirest.post(actionConst.alitaApiUrl)
+            .headers({'Accept': 'application/json', 'Content-Type': 'application/json'})
+            .send(reqBody)
+            .end(function (response) {
+                console.log('alita api response: '+JSON.stringify(response.body));
+
+                // var outputTxt = dialogResGen.genResponseText(reqBody.action, response);
+                
+                if(response.body.data.length == 0) {
+                    var outouptData = genOutputContext(session, contextName);
+                    res.send(genOutputData(outouptData));
+                }
+                else {
+                    var outputTxt = dialogResGen.genResponseText(reqBody.action, response);
+                    res.send(genOutputData(outputTxt));
+                }
+                
 
             });
 
