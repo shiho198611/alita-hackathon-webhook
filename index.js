@@ -57,11 +57,11 @@ server.post('/actalita', function(req, res) {
     else if(getIntent == actionConst.actionMeetingRoomBookingConfirm) {
         // queryApi(genRequestBody('mr', ));
 
-        var timeStart = getApiUseTimeFormat(req.body.queryResult.outputContexts.parameters.time);
+        var timeStart = getApiUseTimeFormat(req.body.queryResult.outputContexts[0].parameters.time);
         var timeEnd = timeStart;
 
-        if(req.body.queryResult.outputContexts.parameters.time1 != null && req.body.queryResult.outputContexts.parameters.time1 != "") {
-            var timeEnd = getApiUseTimeFormat(req.body.queryResult.outputContexts.parameters.time1);
+        if(req.body.queryResult.outputContexts[0].parameters.time1 != null && req.body.queryResult.outputContexts[0].parameters.time1 != "") {
+            var timeEnd = getApiUseTimeFormat(req.body.queryResult.outputContexts[0].parameters.time1);
             console.log("booking start time: "+timeStart);
             console.log("booking end time: "+timeEnd);
         
