@@ -20,14 +20,21 @@ server.post('/actalita', function(req, res) {
     var getIntent = req.body.queryResult.intent.displayName;
     var outputData;
 
+    var telegramUserName = 'david198611' //Initial variable is for Dialogflow console testing.
+    var requestTeleUserName = req.body.originalDetectIntentRequest.payload.data.message.chat.username;
+
+    if(requestTeleUserName != null) {
+        telegramUserName = requestTeleUserName;
+    }
+
     if(getIntent == actionConst.actionAllowanceSearch) {
-        queryApi('ta', 'david.huang@skylinetw.com', res);
+        queryApi('ta', telegramUserName, res);
     }
     else if(getIntent == actionConst.actionAlitaAllowanceInit) {
-        queryApi('all_action', 'david.huang@skylinetw.com', res);
+        queryApi('all_action', telegramUserName, res);
     }
     else if(getIntent == actionConst.actionDownloadBillingStatement) {
-        queryApi('bls', 'david.huang@skylinetw.com', res);
+        queryApi('bls', telegramUserName, res);
     }
     else {
         var outputTxt = "不好意思，這不是可接受的問題，請再問一次";
