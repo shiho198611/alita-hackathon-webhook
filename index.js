@@ -39,14 +39,20 @@ server.post('/actalita', function(req, res) {
     }
     else if(getIntent == actionConst.actionMeetingRoomBooking) {
         var timeStart = getApiUseTimeFormat(req.body.queryResult.parameters.time);
-        var timeEnd = getApiUseTimeFormat(req.body.queryResult.parameters.time1);
 
-        console.log("start time: "+timeStart);
-        console.log("end time: "+timeEnd);
+        if(req.body.queryResult.parameters.time1 != null) {
+            var timeEnd = getApiUseTimeFormat(req.body.queryResult.parameters.time1);
+            console.log("start time: "+timeStart);
+            console.log("end time: "+timeEnd);
         
-        queryApi(genRequestBody('mr', telegramUserName, 'ck', timeStart, timeEnd), res);
+            queryApi(genRequestBody('mr', telegramUserName, 'ck', timeStart, timeEnd), res);
+        }
+        else {
+            queryApi(genRequestBody('mr', telegramUserName, 'ck', timeStart), res);
+        }
+        
 
-        
+
     }
     else {
         var outputTxt = "不好意思，這不是可接受的問題，請再問一次";
@@ -103,6 +109,17 @@ var genRequestBody = function(action, telegramId, type, sDate, eDate) {
         telegram_id : telegramId,
         sdate: sDate,
         edate: eDate,
+        type: type
+    };
+
+    return reqBody;
+}
+
+var genRequestBody = function(action, telegramId, type, sDate) {
+    var reqBody = {
+        action : action,
+        telegram_id : telegramId,
+        sdate: sDate,
         type: type
     };
 
