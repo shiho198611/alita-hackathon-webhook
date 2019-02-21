@@ -8,4 +8,10 @@ module.exports = {
     actionMeetingRoomNumber: 'alita_meeting_room_number_search',
     actionMeetingRoomBooking: 'alita_meeting_room_booking',
     actionMeetingRoomBookingConfirm: "alita_meeting_room_booking - confirm",
+    actionMeetingRoomCancel: "alita_meeting_room_cancel",
+    actionMeetingRoomCancelConfirm: "alita_meeting_room_cancel - confirm",
+    actionMeetingRoomSearch: 'alita_meeting_room_search',
+    // confirm
+    confirm_yes: '是',
+    confirm_no: '否',
 }
