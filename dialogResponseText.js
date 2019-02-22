@@ -3,8 +3,12 @@ exports.genResponseText = function (action, alitaRes) {
 
     var outputTxt = '';
 
-    if (action == 'ta') {
-        outputTxt = "旅遊補助有" + alitaRes.body.data[0].balance;
+    if (action === 'ta') {
+        if (alitaRes.body.data.length === 0) {
+            outputTxt = "查無此人";
+        } else {
+            outputTxt = "2019 旅遊補助剩餘：" + alitaRes.body.data[0].balance;
+        }
     }
     else if (action == 'all_action') {
         var data = alitaRes.body.data;
